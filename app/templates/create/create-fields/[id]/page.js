@@ -68,7 +68,7 @@ function TextFilter({ questions, type }) {
       <form className="flex flex-row gap-2">
         <select className="px-3 py-2 w-[200px] text-sm text-slate-400 border border-slate-300 rounded outline-none">
           {questions.map((question, index) => {
-            return <option value={index}>{question.question}</option>;
+            return <option key={`option${index}`} value={index}>{question.question}</option>;
           })}
         </select>
 
