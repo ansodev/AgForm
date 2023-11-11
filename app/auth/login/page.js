@@ -32,15 +32,15 @@ export default function Page() {
   return (
     <div className="flex h-screen w-full">
       <div className="w-full h-screen">
-        <div className="flex flex-col md:flex-row shadow-lg overflow-hidden">
-          <div className="md:flex md:w-1/2 bg-gray-300 h-screen">
+        <div className="flex flex-col md:flex-row flex-col shadow-lg overflow-hidden">
+          <div className="md:flex md:w-1/2 bg-gray-300 md:h-screen h-[200px]">
             <div
               className="bg-cover bg-center w-full h-full"
               style={{ backgroundImage: "url('/image-login.png')" }}
             />
           </div>
           <form
-            className="md:w-1/2 pt-[150px] px-[15vh] bg-white"
+            className="md:w-1/2 h-screen pt-[150px] md:px-[15vh] px-[5vh] bg-white"
             onSubmit={handleSubmit}
           >
             {alert && <Alert msg={alert.msg} type={alert.type} alert />}
@@ -48,7 +48,7 @@ export default function Page() {
             <div className="flex flex-col mb-8">
               <label
                 htmlFor="email"
-                className={`block text-[${theme.colors.primary.color}] text-sm font-bold mb-2`}
+                className={`block text-[#E0783E] text-sm font-bold mb-2`}
               >
                 EMAIL
               </label>
@@ -64,7 +64,7 @@ export default function Page() {
             <div className="flex flex-col mb-6">
               <label
                 htmlFor="password"
-                className={`block text-[${theme.colors.primary.color}] text-sm font-bold mb-2`}
+                className={`block text-[#E0783E] text-sm font-bold mb-2`}
               >
                 SENHA
               </label>
@@ -79,7 +79,7 @@ export default function Page() {
               <div className="w-full flex justify-end">
                 <a
                   href="#"
-                  className={`inline-block align-baseline font-light text-sm text-[${theme.colors.primary.color}] hover:text-[${theme.colors.primary.hover}]`}
+                  className={`inline-block align-baseline font-light text-sm text-[#E0783E] hover:text-[#c13f0b]`}
                 >
                   Esqueceu a senha?
                 </a>
@@ -89,7 +89,7 @@ export default function Page() {
             <div className="flex items-center justify-between mt-12">
               <button
                 disabled={loading}
-                className={`w-full bg-[${theme.colors.primary.color}] hover:bg-[${theme.colors.primary.hover}] text-[${theme.colors.primary.contrastText}] font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline`}
+                className={`w-full bg-[#E0783E] hover:bg-[#c13f0b] text-[#fff] font-bold py-2 px-4 rounded-lg focus:outline-none focus:shadow-outline`}
               >
                 {loading ? "..." : "ENTRAR"}
               </button>
