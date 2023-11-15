@@ -20,9 +20,11 @@ export default function Page() {
       email,
       password,
     });
-    if (error) setAlert({ msg: error.message, type: "error" });
-    setLoading(false);
-    if (data.session) push("/");
+    if (error) {
+      setAlert({ msg: error.message, type: "error" })
+      setLoading(false);
+    };
+    if (data.session) push("/main");
   }
 
   useEffect(() => {
