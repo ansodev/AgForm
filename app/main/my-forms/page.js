@@ -1,4 +1,4 @@
-import AddButton from "../components/add-button";
+import AddButton from "./components/add-button";
 import FormList from "./components/form-list";
 
 export default function MyForms() {

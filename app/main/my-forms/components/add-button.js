@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const variants = {
@@ -29,6 +30,7 @@ const buttonVariants = {
 export default function AddButton() {
   const [status, setStatus] = useState("closed");
   const [buttonStatus, setButtonStatus] = useState("closed");
+  const router = useRouter();
 
   function handleMouseEnter() {
     setStatus('opened');
@@ -38,6 +40,10 @@ export default function AddButton() {
   function handleMouseLeave() {
     setStatus('closed');
     setButtonStatus('closed');
+  }
+
+  function handleClick() {
+    router.push('/new-form');
   }
 
   return (
@@ -55,7 +61,7 @@ export default function AddButton() {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         className="bg-white p-[14px] rounded-full w-[65px] text-3xl z-10"
-        onClick={() => setStatus("opened")}
+        onClick={handleClick}
       >
         +
       </motion.button>
