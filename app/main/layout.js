@@ -1,4 +1,4 @@
-import Menu from "@/app/main/components/Menu";
+import Menu from "@/app/main/components/Menu.js";
 
 export default function MainLayout({children}) {
   return (
