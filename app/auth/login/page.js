@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import theme from "@/app/theme";
 import { supabase } from "@/lib/supabase";
 
 export default function Page() {
