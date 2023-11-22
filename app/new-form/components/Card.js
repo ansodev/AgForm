@@ -14,7 +14,7 @@ export default function Card({ children, showPrior, nextUrl }) {
   }
 
   return (
-    <div className="bg-white w-[95%] h-[300px] m-5 rounded-xl shadow-sm relative text-black">
+    <div className="bg-white w-[95%] min-h-[300px] m-5 pb-10 rounded-xl shadow-sm relative text-black">
       {children}
 
       {!!showPrior && (
