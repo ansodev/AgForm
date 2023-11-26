@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect,  } from "react";
 import useProgressStore from "../store/progress.store";
 import Card from "../components/Card";
 import PageTransition from "../components/PageTransition";
-import Image from "next/image";
-import Flag from "./components/Flag";
+import useFormDataStore from "../store/form-data.store";
+import IconOption from "../components/IconOption";
 
 const flags1 = [
   {
@@ -42,7 +42,9 @@ const flags2 = [
 ];
 
 export default function CountryPage() {
-  const [selected, setSelected] = useState("");
+  const country = useFormDataStore((state) => state.country);
+  const setCountry = useFormDataStore((state) => state.setCountry);
+
   const setActive = useProgressStore((state) => state.setActive);
 
   useEffect(() => {
@@ -50,7 +52,7 @@ export default function CountryPage() {
   }, []);
 
   function handleFlagClick(name) {
-    setSelected(name);
+    setCountry(name);
   }
 
   return (
@@ -60,23 +62,23 @@ export default function CountryPage() {
           <h1 className="text-2xl font-bold">Qual seu país?</h1>
           <div className="flex gap-12 mt-10">
             {flags1.map((flag) => (
-              <Flag
+              <IconOption
                 key={`flag-${flag.name}`}
                 icon={flag.icon}
                 name={flag.name}
                 onClick={() => handleFlagClick(flag.name)}
-                selected={flag.name === selected}
+                selected={flag.name === country}
               />
             ))}
           </div>
-          <div className="flex gap-12 mt-10">
+          <div className="flex gap-12 mt-8">
             {flags2.map((flag) => (
-              <Flag
+              <IconOption
                 key={`flag-${flag.name}`}
                 icon={flag.icon}
                 name={flag.name}
                 onClick={() => handleFlagClick(flag.name)}
-                selected={flag.name === selected}
+                selected={flag.name === country}
               />
             ))}
           </div>
