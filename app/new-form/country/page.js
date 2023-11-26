@@ -6,6 +6,7 @@ import Card from "../components/Card";
 import PageTransition from "../components/PageTransition";
 import useFormDataStore from "../store/form-data.store";
 import IconOption from "../components/IconOption";
+import { useRouter } from "next/navigation";
 
 const flags1 = [
   {
@@ -44,8 +45,8 @@ const flags2 = [
 export default function CountryPage() {
   const country = useFormDataStore((state) => state.country);
   const setCountry = useFormDataStore((state) => state.setCountry);
-
   const setActive = useProgressStore((state) => state.setActive);
+  const router = useRouter();
 
   useEffect(() => {
     setActive("País");
@@ -55,9 +56,13 @@ export default function CountryPage() {
     setCountry(name);
   }
 
+  function onNextClick() {
+    router.push('crop');
+  }
+
   return (
     <PageTransition>
-      <Card nextUrl="crop">
+      <Card onNextClick={onNextClick} nextActive={!!country}>
         <div className="w-full flex flex-col items-center pt-10">
           <h1 className="text-2xl font-bold">Qual seu país?</h1>
           <div className="flex gap-12 mt-10">

@@ -1,37 +1,43 @@
-"use client";
-
-import { useRouter } from "next/navigation";
-
-export default function Card({ children, showPrior, nextUrl }) {
-  const router = useRouter();
-
-  function handleBackClick() {
-    router.back();
+export default function Card({
+  children,
+  onPriorClick,
+  onNextClick,
+  nextActive,
+  disabled = false,
+}) {
+  function handlePriorClick() {
+    onPriorClick();
   }
 
   function handleNextClick() {
-    router.push(nextUrl);
+    if (nextActive) {
+      onNextClick();
+    }
   }
 
+  const classNextActive = nextActive ? '' :  'opacity-30'
+
   return (
-    <div className="bg-white w-[95%] min-h-[300px] m-5 pb-10 rounded-xl shadow-sm relative text-black">
+    <div className="bg-white w-[95%] min-h-[300px] m-5 pb-10 rounded-xl shadow-sm relative text-black disabled:opacity-10">
       {children}
 
-      {!!showPrior && (
+      {!!onPriorClick && !disabled && (
         <button
-          onClick={handleBackClick}
+          onClick={handlePriorClick}
           className="bg-[#E0783E] absolute bottom-5 left-5 rounded-full w-[50px] h-[50px] flex justify-center items-center"
         >
           <img src="/prior-icon.svg" alt="prior button" />
         </button>
       )}
-
-      <button
-        onClick={handleNextClick}
-        className="bg-[#E0783E] absolute bottom-5 right-5 rounded-full w-[50px] h-[50px] flex justify-center items-center"
-      >
-        <img src="/next-icon.svg" alt="prior button" />
-      </button>
+      {!disabled && (
+        <button
+          disabled={!nextActive}
+          onClick={handleNextClick}
+          className={`bg-[#E0783E] absolute bottom-5 right-5 rounded-full w-[50px] h-[50px] flex justify-center items-center ${classNextActive}`}
+        >
+          <img src="/next-icon.svg" alt="prior button" />
+        </button>
+      )}
     </div>
   );
 }

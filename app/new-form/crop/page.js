@@ -6,6 +6,7 @@ import Card from "../components/Card";
 import PageTransition from "../components/PageTransition";
 import useFormDataStore from "../store/form-data.store";
 import IconOption from "../components/IconOption";
+import { useRouter } from "next/navigation";
 
 const crops1 = [
   {
@@ -41,9 +42,18 @@ export default function CropPage() {
   const crop = useFormDataStore((state) => state.crop);
   const setCrop = useFormDataStore((state) => state.setCrop);
   const setActive = useProgressStore((state) => state.setActive);
+  const router = useRouter();
 
   function handeCropClick(name) {
     setCrop(name);
+  }
+
+  function onPriorClick() {
+    router.back();
+  }
+
+  function onNextClick() {
+    router.push('aplication');
   }
 
   useEffect(() => {
@@ -52,7 +62,7 @@ export default function CropPage() {
 
   return (
     <PageTransition>
-      <Card nextUrl="aplication" showPrior>
+      <Card onPriorClick={onPriorClick} onNextClick={onNextClick} nextActive={!!crop}>
         <div className="w-full flex flex-col items-center pt-10">
           <h1 className="text-2xl font-bold">
             Qual cultura agrícola você irá avaliar?
