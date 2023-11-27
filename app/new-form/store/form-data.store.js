@@ -5,6 +5,7 @@ const useFormDataStore = create((set) => ({
   crop: '',
   application: '',
   goals: [],
+  practices: [],
   setCountry: (value) => set(() => ({ country: value })),
   setCrop: (value) => set(() => ({crop: value})),
   setApplication: (value) => set(() => ({application: value})),
@@ -13,6 +14,13 @@ const useFormDataStore = create((set) => ({
     const newList = state.goals.filter((goal => goal !== value));
     return {
       goals: newList
+    }
+  }),
+  addPractices: (value) => set((state) => ({practices: [...state.practices, value]})),
+  removePractices: (value) => set((state) => {
+    const newList = state.practices.filter((practices => practices !== value));
+    return {
+      practices: newList
     }
   }),
 }));
