@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function IconOption({ icon, name, description, lg, selected, onClick, disabled }) {
   const classSelected = selected
-    ? "bg-[#f1b496] p-3 rounded-2xl border-2 border-[#E0783E]"
+    ? "bg-[#f1b496]  rounded-2xl border-2 border-[#E0783E]"
     : "hover:bg-[#E0783E] hover:border-[#f1b496] hover:border-2 rounded-2xl";
   
   const classDisabled = disabled ? 'pointer-events-none opacity-50' : 'cursor-pointer opacity-1' 

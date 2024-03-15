@@ -6,6 +6,7 @@ const useFormDataStore = create((set) => ({
   application: '',
   goals: [],
   practices: [],
+  ods: [],
   setCountry: (value) => set(() => ({ country: value })),
   setCrop: (value) => set(() => ({crop: value})),
   setApplication: (value) => set(() => ({application: value})),
@@ -23,6 +24,13 @@ const useFormDataStore = create((set) => ({
       practices: newList
     }
   }),
+  addODS: (value) => set((state) => ({ ods: [...state.ods, value] })),
+  removeODS: (value) => set((state) => {
+    const newODSList = state.ods.filter(ods => ods !== value);
+    return {
+      ods: newODSList
+    }
+  })
 }));
 
 export default useFormDataStore;

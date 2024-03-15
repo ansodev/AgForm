@@ -7,6 +7,8 @@ import PageTransition from "../components/PageTransition";
 import IconOption from "../components/IconOption";
 import useFormDataStore from "../store/form-data.store";
 import { useRouter } from "next/navigation";
+import GoodPractices from "./components/good-practices";
+import ODS from "./components/ods";
 
 const goalsList = [
   {
@@ -31,42 +33,12 @@ const goalsList = [
   },
 ];
 
-const goodPractices = [
-  {
-    id: "soloHandling",
-    name: "Manejo de solo",
-    icon: "/good-practices/solo-handling.svg",
-  },
-  {
-    id: "pestHandling",
-    name: "Manejo de pragas",
-    icon: "/good-practices/pest-handling.svg",
-  },
-  {
-    id: "agrochemicals",
-    name: "Uso seguro de agroquímicos",
-    icon: "/good-practices/safe-use-of-agrochemicals.svg",
-  },
-  {
-    id: "waterManagement",
-    name: "Gestão de água",
-    icon: "/good-practices/water-management.svg",
-  },
-  {
-    id: "biodiversity",
-    name: "Gestão de biodiversidade",
-    icon: "/good-practices/biodiversity-management.svg",
-  },
-];
-
 export default function GoalsPage() {
   const goals = useFormDataStore((state) => state.goals);
   const addGoal = useFormDataStore((state) => state.addGoal);
   const removeGoal = useFormDataStore((state) => state.removeGoal);
   const setActive = useProgressStore((state) => state.setActive);
-  const practices = useFormDataStore((state) => state.practices);
-  const addPractices = useFormDataStore((state) => state.addPractices);
-  const removePractices = useFormDataStore((state) => state.removePractices);
+  
   const router = useRouter();
   const [enabledGoal, setEnabledGoal] = useState(true);
   const [cardStatus, setCardStatus] = useState({
@@ -81,14 +53,6 @@ export default function GoalsPage() {
       removeGoal(name);
     } else {
       addGoal(name);
-    }
-  }
-
-  function handlePracticesClick(name) {
-    if (practices.indexOf(name) >= 0) {
-      removePractices(name);
-    } else {
-      addPractices(name);
     }
   }
 
@@ -156,39 +120,11 @@ export default function GoalsPage() {
       </Card>
 
       {cardStatus.practices && (
-        <Card
-          onPriorClick={() => onPriorClick("practices")}
-          onNextClick={onNextClick}
-          nextActive={practices.length > 0}
-        >
-          <div className="w-full flex flex-col items-center pt-10">
-            <h1 className="text-2xl font-bold">
-              Quais são as boa práticas avaliadas?
-            </h1>
-            <div className="mt-10 flex flex-wrap justify-center gap-y-10">
-              {goodPractices.map((practicesItem) => (
-                <div className="w-1/3" key={`practices-${practicesItem.name}`}>
-                  <IconOption
-                   
-                    icon={practicesItem.icon}
-                    name={practicesItem.name}
-                    description={practicesItem.description}
-                    selected={practices.indexOf(practicesItem.name) >= 0}
-                    onClick={() => handlePracticesClick(practicesItem.name)}
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        </Card>
+        <GoodPractices onNextClick={onNextClick} onPriorClick={onPriorClick}/>
       )}
 
       {cardStatus.ods && (
-        <Card onPriorClick={() => onPriorClick("ods")}>
-          <div className="w-full flex flex-col items-center pt-10">
-            <h1 className="text-2xl font-bold">Escolha as ODS desejadas:</h1>
-          </div>
-        </Card>
+        <ODS onPriorClick={onPriorClick}/>
       )}
     </PageTransition>
   );
