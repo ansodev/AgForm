@@ -2,12 +2,17 @@ import { create } from 'zustand'
 
 const useProgressStore = create((set) => ({
   listItensProgress: [
-     
+    {
+      text: "Nome",
+      icon: "/name.svg",
+      first: true,
+      active: true,
+    },
     {
       text: "País",
       icon: "/country.svg",
-      first: true,
-      active: true,
+      first: false,
+      active: false,
     },
     {
       text: "Cultura",

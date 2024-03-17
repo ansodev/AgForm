@@ -7,6 +7,8 @@ const useFormDataStore = create((set) => ({
   goals: [],
   practices: [],
   ods: [],
+  formName: '',
+  setFormName: (value) => set(() => ({formName: value})),
   setCountry: (value) => set(() => ({ country: value })),
   setCrop: (value) => set(() => ({crop: value})),
   setApplication: (value) => set(() => ({application: value})),

@@ -43,7 +43,7 @@ export default function AddButton() {
   }
 
   function handleClick() {
-    router.push('/new-form/country');
+    router.push('/new-form/initial-form');
   }
 
   return (

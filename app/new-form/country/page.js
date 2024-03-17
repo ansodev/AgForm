@@ -56,13 +56,17 @@ export default function CountryPage() {
     setCountry(name);
   }
 
+  function onPriorClick() {
+    router.back();
+  }
+
   function onNextClick() {
     router.push('crop');
   }
 
   return (
     <PageTransition>
-      <Card onNextClick={onNextClick} nextActive={!!country}>
+      <Card onNextClick={onNextClick} nextActive={!!country} onPriorClick={onPriorClick}>
         <div className="w-full flex flex-col items-center pt-10">
           <h1 className="text-2xl font-bold">Qual seu país?</h1>
           <div className="flex gap-12 mt-10">
