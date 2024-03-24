@@ -48,11 +48,11 @@ export default function GoalsPage() {
     ods: false,
   });
 
-  function handleGoalClick(name) {
-    if (goals.indexOf(name) >= 0) {
-      removeGoal(name);
+  function handleGoalClick(goal) {
+    if (goals.indexOf(goal) >= 0) {
+      removeGoal(goal);
     } else {
-      addGoal(name);
+      addGoal(goal);
     }
   }
 
@@ -60,13 +60,27 @@ export default function GoalsPage() {
     router.back();
   }
 
+  function getGoalsRef(goals, goalsList) {
+    return goals.map((goal) => goalsList.find((item) => item.id === goal.id));
+  }
+
+  function allGoalsOpened(goals, goalsList, cardStatus) {
+    const goalsRef = getGoalsRef(goals, goalsList);
+    return goalsRef.every((goal) => cardStatus[goal.id]);
+  }
+
   function onNextClick() {
+    if (allGoalsOpened(goals, goalsList, cardStatus)) {
+      router.push("/new-form/summary");
+      return;
+    }
+
     if (goals.length > 0) {
       setEnabledGoal(false);
     }
 
-    for (let i = 0; i <= goalsList.length; i++) {
-      if (goals.indexOf(goalsList[i].name) >= 0) {
+    for (let i = 0; i < goalsList.length; i++) {
+      if (goals.findIndex(item => item.id === goalsList[i].id) >= 0) {
         if (!cardStatus[goalsList[i].id]) {
           setCardStatus({
             ...cardStatus,
@@ -76,6 +90,7 @@ export default function GoalsPage() {
         }
       }
     }
+
   }
 
   function onPriorClick(id) {
@@ -109,8 +124,8 @@ export default function GoalsPage() {
                 icon={goalItem.icon}
                 name={goalItem.name}
                 description={goalItem.description}
-                selected={goals.indexOf(goalItem.name) >= 0}
-                onClick={() => handleGoalClick(goalItem.name)}
+                selected={goals.findIndex(item => item.id === goalItem.id) >= 0}
+                onClick={() => handleGoalClick(goalItem)}
                 disabled={!enabledGoal}
                 className="flex-grow"
               />
@@ -124,7 +139,7 @@ export default function GoalsPage() {
       )}
 
       {cardStatus.ods && (
-        <ODS onPriorClick={onPriorClick}/>
+        <ODS onPriorClick={onPriorClick} onNextClick={onNextClick}/>
       )}
     </PageTransition>
   );

@@ -47,11 +47,11 @@ export default function GoodPractices({onNextClick, onPriorClick}) {
     }
   }
 
-  function handlePracticesClick(name) {
-    if (practices.indexOf(name) >= 0) {
-      removePractices(name);
+  function handlePracticesClick(practice) {
+    if (practices.findIndex(item => item.id === practice.id) >= 0) {
+      removePractices(practice);
     } else {
-      addPractices(name);
+      addPractices(practice);
     }
   }
 
@@ -72,8 +72,8 @@ export default function GoodPractices({onNextClick, onPriorClick}) {
                 icon={practicesItem.icon}
                 name={practicesItem.name}
                 description={practicesItem.description}
-                selected={practices.indexOf(practicesItem.name) >= 0}
-                onClick={() => handlePracticesClick(practicesItem.name)}
+                selected={practices.findIndex(item => item.id === practicesItem.id) >= 0}
+                onClick={() => handlePracticesClick(practicesItem)}
               />
             </div>
           ))}
